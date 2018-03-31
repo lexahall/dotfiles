@@ -1,6 +1,6 @@
 # Set prompt format
 PROMPT='
-$TIME $CONDITIONAL_MACHINE $DIR $(git_prompt_info) $(git_prompt_status)
+%B$TIME $CONDITIONAL_MACHINE $DIR $(git_prompt_info)%b $(git_prompt_status)
 $PROMPT_SYMBOL'
 
 # Prompt components
@@ -13,7 +13,7 @@ DIR="%~"
 
 # Use machine name if currently ssh'd into a remote machine
 if [[ -n $SSH_CONNECTION ]]; then
-  CONDITIONAL_MACHINE="$SEP %F{cyan}$MACHINE%f $SEP"
+  CONDITIONAL_MACHINE="$SEP %F{green}$MACHINE%f $SEP"
 else
   CONDITIONAL_MACHINE="$SEP"
 fi
