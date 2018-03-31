@@ -13,7 +13,7 @@ DIR="%~"
 
 # Use machine name if currently ssh'd into a remote machine
 if [[ -n $SSH_CONNECTION ]]; then
-  CONDITIONAL_MACHINE="$SEP %F{green}$MACHINE%f $SEP"
+  CONDITIONAL_MACHINE="$SEP %F{blue}$MACHINE%f $SEP"
 else
   CONDITIONAL_MACHINE="$SEP"
 fi

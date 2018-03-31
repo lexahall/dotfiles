@@ -102,7 +102,7 @@ tab-reset() {
 }
 
 if [[ -n "$SSH_CONNECTION" ]]; then
-  tab-color 74 218 86
+  tab-color 82 139 220
 else
   tab-reset
 fi
