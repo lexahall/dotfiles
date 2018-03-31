@@ -91,15 +91,20 @@ alias unix4="ssh lhall07@unix4.csc.calpoly.edu"
 alias hpm="ssh lhall07@127x10.csc.calpoly.edu"
 alias zrc="vim ~/.zshrc"
 
-# iterm tabs
-# Usage:
-# source iterm2.zsh
-
 # Change the color of the tab when using SSH
+tab-color() {
+    echo -ne "\033]6;1;bg;red;brightness;$1\a"
+    echo -ne "\033]6;1;bg;green;brightness;$2\a"
+    echo -ne "\033]6;1;bg;blue;brightness;$3\a"
+}
+tab-reset() {
+    echo -ne "\033]6;1;bg;*;default\a"
+}
+
 if [[ -n "$SSH_CONNECTION" ]]; then
-  echo -ne "\033]6;1;bg;green;brightness;$2\a"
+  tab-color 74 218 86
 else
-  echo -ne "\033]6;1;bg;*;default\a"
+  tab-reset
 fi
 
 # iTerm tab title
