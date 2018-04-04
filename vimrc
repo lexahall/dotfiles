@@ -12,39 +12,33 @@ set t_Co=256
 set background=dark       " Light background for color schemes.
 colorscheme monokai       " Monokai color scheme.
 
-set keywordprg=pman       " php man shizzles
+set path=./**
 set colorcolumn=80
 set pastetoggle=<F3>      " map paste to F3
 set autowrite             " Write before executing the 'make' command.
 set backspace=2           " Allow <BS> to go past last insert.
 set expandtab             " Expand tabs with spaces.
-set nofoldenable          " Disable folds; toggle with zi.
 set gdefault              " Assume :s uses /g.
 set ignorecase            " Ignore case in regular expressions
+set smartcase             " Searches are case-sensitive if caps used.
 set incsearch             " Immediately highlight search matches.
+set nohls                 " Don't highlight all regex matches.
 set modeline              " Check for a modeline.
 set noerrorbells          " No beeps on errors.
-set nohls                 " Don't highlight all regex matches.
 set nowrap                " Don't soft wrap.
 set number                " Display line numbers.
 set ruler                 " Display row, column and % of document.
 set scrolloff=10          " Keep min of 10 lines above/below cursor.
 set shiftwidth=2          " >> and << shift 2 spaces.
+set softtabstop=2         " See spaces as tabs.
+set tabstop=2             " <Tab> move two characters.
 set showcmd               " Show partial commands in the status line.
 set showmatch             " Show matching () {} etc..
 set showmode              " Show current mode.
-set smartcase             " Searches are case-sensitive if caps used.
-set softtabstop=2         " See spaces as tabs.
-set tabstop=2             " <Tab> move three characters.
 set textwidth=79          " Hard wrap at 79 characters.
 set virtualedit=block     " Allow the cursor to go where there's no char.
 set list                  " Show invisibles
-set listchars=trail:␣
-
-" Live dangerously
-set nobackup
-set nowritebackup
-set noswapfile
+set listchars=trail:␣     " Show trailing whitespace char
 
 "set wildmode=longest,list " Tab completion works like bash.
 
@@ -79,14 +73,8 @@ set formatoptions+=ronl
 " Make Q reformat text.
 noremap Q gq
 
-" Toggle paste mode.
-noremap <Leader>p :set paste!<CR>
-
 " Open the file under the cursor in a new tab.
 noremap <Leader>ot <C-W>gf
-
-" Toggle highlighting of the last search.
-noremap <Leader>h :set hlsearch! hlsearch?<CR>
 
 " Open a scratch buffer.
 noremap <Leader>s :Scratch<CR>
@@ -97,10 +85,36 @@ function LcdToCurrent()
     execute "lcd " . dir
 endfunction
 noremap <Leader>cd :call LcdToCurrent()<CR>
+"
+"==========================================
+" From: https://gist.github.com/3882918
+" Author: Marc Zych
+nnoremap <silent> <C-o> :call FindFile()<CR>
+nnoremap <silent> <C-q> :find
+
+function! FindFile()
+   " Get the word under cursor.
+   let cursorWord = expand("<cword>")
+   " Get the current file name and keep only the extension.
+   let currentFile = expand("%")
+   let extPos = strridx(currentFile, ".")
+
+   " Append an extension only if the current file has an extension.
+   if extPos != -1
+      let extension = strpart(currentFile, extPos)
+   else
+      let extension = ""
+   endif
+
+   " Construct the file name.
+   let fileName = cursorWord.extension
+
+   " Open the file in the current buffer.
+   execute "Find /".fileName
+endfunction
+"==========================================
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Insert mode cartography
-
 " Insert <Tab> or complete identifier if the cursor is after a keyword
 " character.
 function TabOrComplete()
@@ -123,14 +137,17 @@ function! RestoreCursor()
         normal! zz
     endif
 endfunction
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Stefan - custom commands
-"
-let g:dbgPavimPort = 9000
-let g:dbgPavimBreakAtEntry = 0
 
-command Nuke %s/\s\+$//gc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Set custom tab size
+
 command JS :set ts=2 sw=2 sts=2 et
-command PHP :set ts=2 sw=2 sts=2 et
+command PHP :set ts=3 sw=3 sts=3 et
 command PYTHON :set ts=2 sw=2 sts=2 et
-command PE :set path=.,,~/Code/../ifixit-eustore/oxid49/**
+
+
+" Allow local overrides
+let $LOCALFILE=expand("~/.vimrc_local")
+if filereadable($LOCALFILE)
+  source $LOCALFILE
+endif
