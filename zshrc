@@ -82,6 +82,8 @@ HIST_STAMPS="mm/dd/yyyy"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+source $ZSH/oh-my-zsh.sh
+
 # functions and aliases
 alias com="ssh lhall@cominor.com -t 'cd Code; zsh'"
 alias unix1="ssh unix1"
@@ -90,6 +92,9 @@ alias unix3="ssh lhall07@unix3.csc.calpoly.edu"
 alias unix4="ssh lhall07@unix4.csc.calpoly.edu"
 alias hpm="ssh lhall07@127x10.csc.calpoly.edu"
 alias zrc="vim ~/.zshrc"
+
+# Remove gg alias added by git plugin
+unalias gg
 
 # Change the color of the tab when using SSH
 tab-color() {
@@ -113,7 +118,7 @@ fi
 
 #DISABLE_AUTO_TITLE="true"
 
-#setTerminalText () {
+# setTerminalText () {
 #    # echo works in bash & zsh
 #    local mode=$1 ; shift
 #    echo -ne "\033]title\007"
@@ -125,5 +130,7 @@ fi
 # use vim keybindings
 # bindkey -v
 
-source $ZSH/oh-my-zsh.sh
-
+# Allow local overrides
+if [ -f ~/.zshrc_local ]; then
+  source ~/.zshrc_local
+fi
