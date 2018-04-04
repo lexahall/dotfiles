@@ -85,12 +85,6 @@ HIST_STAMPS="mm/dd/yyyy"
 source $ZSH/oh-my-zsh.sh
 
 # functions and aliases
-alias com="ssh lhall@cominor.com -t 'cd Code; zsh'"
-alias unix1="ssh unix1"
-alias unix2="ssh lhall07@unix2.csc.calpoly.edu"
-alias unix3="ssh lhall07@unix3.csc.calpoly.edu"
-alias unix4="ssh lhall07@unix4.csc.calpoly.edu"
-alias hpm="ssh lhall07@127x10.csc.calpoly.edu"
 alias zrc="vim ~/.zshrc"
 
 # Remove gg alias added by git plugin
