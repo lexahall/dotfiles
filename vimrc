@@ -37,7 +37,6 @@ set showmatch             " Show matching () {} etc..
 set showmode              " Show current mode.
 set textwidth=79          " Hard wrap at 79 characters.
 set virtualedit=block     " Allow the cursor to go where there's no char.
-set list                  " Show invisibles
 set listchars=trail:␣     " Show trailing whitespace char
 
 "set wildmode=longest,list " Tab completion works like bash.
