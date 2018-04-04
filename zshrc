@@ -86,6 +86,7 @@ source $ZSH/oh-my-zsh.sh
 
 # functions and aliases
 alias zrc="vim ~/.zshrc"
+alias gsps="git stash; git pull; git stash pop"
 
 # Remove gg alias added by git plugin
 unalias gg
